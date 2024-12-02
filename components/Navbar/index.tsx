@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import { Notifications } from '../../utils/icons';
 import useDimensions from '../../hooks/useDimensions';
 import styles from '../../styles/Navbar.module.scss';
+import { NextRouter, useRouter } from 'next/router';
+import { ROUTES } from '../../config/route';
 
 const Profile = dynamic(import('./Profile'));
 const SearchBar = dynamic(import('./SearchBar'));
@@ -17,6 +19,12 @@ interface NavbarProps {
 export default function Navbar({ isScrolled }: NavbarProps): React.ReactElement {
   const navBackground = isScrolled ? styles.navBar__filled : styles.navBar;
   const { isMobile } = useDimensions();
+  const router: NextRouter = useRouter();
+  
+  const logout = () => {
+    localStorage.removeItem('token');
+    router.replace(ROUTES.HOME);
+  }
 
   return (
     <motion.div
@@ -33,9 +41,9 @@ export default function Navbar({ isScrolled }: NavbarProps): React.ReactElement 
       </div>
 
       <div className={styles.navBar__right}>
-        <SearchBar />
-        {!isMobile && <Notifications className={styles.icon} />}
-        <Profile />
+        {/* <SearchBar /> */}
+        {/* {!isMobile && <Notifications className={styles.icon} />} */}
+        <div className={styles.logout} onClick={() => logout()}>Sair</div>
       </div>
     </motion.div>
   );

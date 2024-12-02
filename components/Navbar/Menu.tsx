@@ -41,31 +41,6 @@ export default function Menu() {
   return (
     <>
       <Image src='/assets/logo.png' alt='' width={90} height={30} className={styles.nfLogo} />
-      {isTablet || isMobile ? (
-        <>
-          <div className={styles.browse}>
-            <div className={styles.options} onMouseOver={onMenu}>
-              browse
-            </div>
-            <motion.div {...caretAnimation}>
-              <CaretDown />
-            </motion.div>
-          </div>
-          <Dialog dialogRef={menuRef} onClose={onClose} classname={styles.menu} visible={isVisible}>
-            {browseList.map((item, index) => (
-              <div key={index} className={styles.options}>
-                {item}
-              </div>
-            ))}
-          </Dialog>
-        </>
-      ) : (
-        browseList.map((item, index) => (
-          <div key={index} className={styles.options}>
-            {item}
-          </div>
-        ))
-      )}
     </>
   );
 }

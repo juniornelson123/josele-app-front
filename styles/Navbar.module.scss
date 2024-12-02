@@ -1,6 +1,10 @@
 @import './variables.scss';
 @import './mixins.scss';
 
+.logout {
+  cursor: pointer;
+}
+
 .navBar {
   background-image: linear-gradient(to bottom, $navBar-transparent 10%, $navBar-gradient);
   transition: all 0.2s ease-out;

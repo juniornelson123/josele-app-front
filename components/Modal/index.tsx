@@ -8,23 +8,23 @@ import { Genre } from '../../types';
 
 export default function Modal() {
   const { modalData, setIsModal, isModal } = useContext(ModalContext);
-  const { title, banner, rating, overview, genre } = modalData;
+  const { nome, imagem, descricao, link, genre } = modalData;
+
+  const openLink = () => {
+    window.open(link, '_blank')  
+  }
 
   return (
     <div className={styles.container} style={{ display: isModal ? 'flex' : 'none' }}>
       <div className={styles.overlay} onClick={() => setIsModal(false)}></div>
       <div className={styles.modal}>
         <div className={styles.spotlight}>
-          <img src={banner} alt='spotlight' className={styles.spotlight__image} />
+          <img src={`${imagem.url}`} alt='spotlight' className={styles.spotlight__image} />
           <div className={styles.details}>
-            <div className={styles.title}>{title}</div>
+            <div className={styles.title}>{nome}</div>
             <div className={styles.buttonRow}>
-              <Button label='Play' filled Icon={Play} />
-              <Button Icon={Add} rounded />
-              <Button Icon={Like} rounded />
-              <Button Icon={Dislike} rounded />
+              <Button label='Play' filled Icon={Play} onClick={() => openLink()}/>
             </div>
-            <div className={styles.greenText}>{rating * 10}% Match</div>
           </div>
         </div>
 
@@ -32,28 +32,10 @@ export default function Modal() {
           &#10005;
         </div>
         <div className={styles.bottomContainer}>
-          <div className={styles.column}>{overview}</div>
-          <div className={styles.column}>
-            <div className={styles.genre}>Genre: {renderGenre(genre)} </div>
-          </div>
+          <div className={styles.column}>{descricao}</div>
         </div>
       </div>
     </div>
   );
 }
 
-function renderGenre(genre: Genre[]) {
-  return (
-    <div className={styles.row}>
-      {genre.map((item, index) => {
-        const isLast = index === genre.length - 1;
-        return (
-          <div key={index} className={styles.row}>
-            <span>&nbsp;{item.name}</span>
-            {!isLast && <div>,</div>}
-          </div>
-        );
-      })}
-    </div>
-  );
-}

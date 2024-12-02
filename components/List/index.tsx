@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import axios from 'axios';
 
 import { Media } from '../../types';
 import styles from '../../styles/Cards.module.scss';
+import getInstance from '../../utils/axios';
 
 const Cards = dynamic(import('./Cards'));
 const FeatureCard = dynamic(import('./FeatureCards'));
@@ -22,10 +22,13 @@ export default function List({
   endpoint
 }: ListProps): React.ReactElement {
   const [media, setMedia] = useState<Media[]>([]);
+  const axios = getInstance();
+ 
  
   async function getEndpoint() {
     try {
       const result = await axios.get(endpoint);
+      console.log(result)
       setMedia(result.data.data);
     } catch (error) {}
   }

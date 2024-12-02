@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import { Media } from '../types';
 
 interface Modal {
-  modalData: Media;
+  modalData: any;
   setModalData: (item: Media) => void;
   isModal: boolean;
   setIsModal: (isModal: boolean) => void;
